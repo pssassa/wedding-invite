@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение на свадьбу | Александр и Мария</title>
+    <!-- Подключаем красивые шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8E7C68; /* Благородный бежево-коричневый */
+            --bg-color: #F9F7F2;      /* Кремовый фон */
+            --text-color: #333;
+            --accent-color: #D4AF37;  /* Золотистый */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        /* --- Главный экран (Hero) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero .date {
+            font-size: 2rem;
+            margin-top: 20px;
+            border-top: 1px solid white;
+            border-bottom: 1px solid white;
+            padding: 10px 20px;
+        }
+
+        /* --- Секции --- */
+        section {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* Декоративная линия под заголовком */
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent-color);
+            margin: 10px auto 0;
+        }
+
+        /* --- Детали (Карточки) --- */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media(min-width: 600px) {
+            .details-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        /* --- Форма --- */
+        .rsvp-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background-color: #6d5e4f;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        /* Анимация появления */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Главный экран -->
+    <header class="hero">
+        <p>Приглашаем на свадьбу</p>
+        <h1>Павел & Алина</h1>
+        <div class="date">15 Августа 2026</div>
+    </header>
+
+    <!-- Приветствие -->
+    <section class="fade-in">
+        <h2 class="section-title">Дорогие гости!</h2>
+        <p>Мы будем очень рады разделить с вами этот особенный день. В нашей жизни наступает новый этап, и мы хотим, чтобы рядом были самые близкие люди.</p>
+    </section>
+
+    <!-- Детали -->
+    <section class="fade-in">
+        <h2 class="section-title">Программа дня</h2>
+        <div class="details-grid">
+            <div class="card">
+                <h3>Где?</h3>
+                <p>📍 База отдыха "Лесная"</p>
+                <p>ул. Приморская улица, д. 12</p>
+                <p><a href="https://yandex.ru/maps/11273/ust-ilimsk/?ll=102.660580%2C57.973996&mode=poi&poi%5Bpoint%5D=102.660497%2C57.973733&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D241311300898&z=18" target="_blank" style="color:var(--primary-color)">Показать на карте</a></p>
+            </div>
+            <div class="card">
+                <h3>Когда?</h3>
+                <p>🕓 16:00 — Сбор гостей</p>
+                <p>🕔 16:30 — Выездная регистрация</p>
+                <p>🕖 18:00 — Праздничный ужин</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма RSVP -->
+    <section class="fade-in">
+        <h2 class="section-title">Подтвердите присутствие</h2>
+        <p style="margin-bottom: 20px;">Пожалуйста, заполните форму до 1 июня.</p>
+        
+        <form class="rsvp-form" id="weddingForm">
+		<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeRKK88FovqhcBVcHkNlPeNXOJwn4uS4hdCoH6c3kkVe-P5zQ/viewform?usp=publish-editor" 
+		width="100%" 
+		height="800" 
+		frameborder="0" 
+		marginheight="0" 
+		marginwidth="0">
+	</iframe>
+        </form>
+    </section>
+
+    <footer>
+        <p>С любовью, Павел и Алина</p>
+        <p>#Pasha_&_Alina_Wedding2026</p>
+    </footer>
+
+    <script>
+        // 1. Анимация появления при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+
+        document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+        // 2. Обработка формы
+        document.getElementById('weddingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Сбор данных
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            const btn = this.querySelector('button');
+            const originalText = btn.innerText;
+            
+            btn.innerText = "Отправлено! Ждем вас!";
+            btn.style.backgroundColor = "#4CAF50"; // Зеленый цвет
+            
+            setTimeout(() => {
+                this.reset();
+                btn.innerText = originalText;
+                btn.style.backgroundColor = "";
+            }, 3000);
+
+            console.log("Данные гостя:", data); // Данные видны в консоли браузера (F12)
+        });
+    </script>
+</body>
+</html>
