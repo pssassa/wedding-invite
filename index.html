@@ -64,61 +64,89 @@
             transform: translateY(0);
         }
 
-        /* === Главный экран с параллаксом === */
+        /* === Главный экран с ДВУМЯ фото === */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: var(--white);
+            justify-content: center;
             position: relative;
+            background: var(--bg-light);
+            overflow: hidden;
         }
 
-        .hero::before {
+        .hero-left, .hero-right {
+            position: absolute;
+            top: 0;
+            width: 35%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .hero-left {
+            left: 0;
+        }
+
+        .hero-right {
+            right: 0;
+        }
+
+        .hero-left img, .hero-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Затемнение по краям фото */
+        .hero-left::after, .hero-right::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.6) 100%);
+            background: linear-gradient(to right, rgba(0,0,0,0.5), transparent);
+        }
+
+        .hero-right::after {
+            background: linear-gradient(to left, rgba(0,0,0,0.5), transparent);
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
-            padding: 20px;
-        }
-
-        .hero .subtitle {
-            font-size: 1.2rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .hero h1 {
-            font-size: 5rem;
-            margin-bottom: 20px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
             animation: fadeIn 1.5s ease-out;
         }
 
+        .hero .subtitle {
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--bg-dark);
+            line-height: 1.1;
+        }
+
         .hero .date {
-            font-size: 2.5rem;
-            border-top: 2px solid var(--white);
-            border-bottom: 2px solid var(--white);
+            font-size: 2rem;
+            border-top: 2px solid var(--secondary);
+            border-bottom: 2px solid var(--secondary);
             padding: 15px 40px;
             margin-top: 30px;
             display: inline-block;
-            animation: fadeIn 2s ease-out;
+            color: var(--primary);
         }
 
         .hero .scroll-down {
@@ -128,13 +156,13 @@
             transform: translateX(-50%);
             animation: float 2s infinite;
             cursor: pointer;
-            z-index: 2;
+            z-index: 3;
         }
 
         .hero .scroll-down svg {
             width: 40px;
             height: 40px;
-            fill: var(--white);
+            fill: var(--primary);
         }
 
         /* === Секции === */
@@ -214,32 +242,6 @@
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-        }
-
-        /* === История === */
-        .story {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            margin-top: 60px;
-        }
-
-        .story-img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 20px 20px 60px rgba(0,0,0,0.1);
-        }
-
-        .story-text {
-            text-align: left;
-            font-size: 1.1rem;
-        }
-
-        .story-text p {
-            margin-bottom: 20px;
         }
 
         /* === Программа дня (таймлайн) === */
@@ -391,6 +393,22 @@
             color: var(--secondary);
             text-decoration: none;
             font-weight: 600;
+        }
+        
+        /* Карта на всю ширину */
+        .map-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 60px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
         }
 
         /* === Форма RSVP === */
@@ -662,8 +680,6 @@
                 <h3>Адрес</h3>
                 <p>База отдыха "Лесная"</p>
                 <p>ул. Приморская улица, д. 12, Усть-Илимск</p>
-                <br>
-                <a href="https://yandex.ru/maps/11273/ust-ilimsk/?ll=102.660580%2C57.973996&mode=poi&poi%5Bpoint%5D=102.660497%2C57.973733&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D241311300898&z=18" target="_blank" style="color:var(--primary-color)"Показать на карте →</a>
             </div>
             <div class="location-card">
                 <div class="location-icon">🚗</div>
@@ -671,8 +687,16 @@
                 <p>Бесплатная парковка для гостей</p>
                 <p>Трансфер по запросу</p>
                 <br>
-                <a href="tel:+79526166916">+7 (952) 616-69-16</a>
+                <a href="tel:+79526166916">Жених Павел</a>
             </div>
+
+            <!-- Интерактивная карта Яндекс -->
+        <div class="map-container">
+            <iframe src="https://yandex.ru/map-widget/v1/?ll=37.617635%2C55.755814&z=12" 
+                    frameborder="0" 
+                    allowfullscreen="true">
+            </iframe>
+        </div>
         </div>
     </section>
 
