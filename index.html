@@ -512,21 +512,23 @@
 
         /* === Адаптивность === */
         @media (max-width: 768px) {
+            .hero-left, .hero-right {
+                display: none;
+            }
+
+            .hero {
+                background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('bg-mobile.jpg');
+                background-size: cover;
+                background-position: center;
+            }
+
             .hero h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
 
             .hero .date {
                 font-size: 1.5rem;
                 padding: 10px 20px;
-            }
-
-            .story {
-                grid-template-columns: 1fr;
-            }
-
-            .story-img {
-                height: 300px;
             }
 
             .timeline::before {
